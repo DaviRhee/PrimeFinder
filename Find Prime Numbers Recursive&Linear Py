@@ -1,0 +1,56 @@
+#Recursive method
+def prime(n, divisor=2):
+    if n <= 2:
+        return n == 2
+    if n % divisor == 0:
+        return False
+    if divisor * divisor > n:
+        return True
+    return prime(n, divisor + 1)
+
+def encontra_primos(N, candidato=2, primos=[]):
+    if N < 2:
+        return []
+
+    if candidato > N:
+        return primos
+
+    if prime(candidato):
+        primos.append(candidato)
+
+    return encontra_primos(N, candidato + 1, primos)
+
+try:
+    N = int(input("Digite um número maior que 1: "))
+    if N > 1:
+        numeros_primos = encontra_primos(N)
+        print(f"Números primos até {N}: {numeros_primos}")
+    else:
+        print("Por favor, digite um número maior que 1.")
+except ValueError:
+    print("Entrada inválida. Digite um número inteiro maior que 1.")
+
+#Linear method
+def numeros_primos(N):
+    primos = []
+    
+    for num in range(2, N + 1):
+        is_primo = True
+        for i in range(2, int(num ** 0.5) + 1):
+            if num % i == 0:
+                is_primo = False
+                break
+        if is_primo:
+            primos.append(num)
+    
+    return primos
+
+try:
+    n = int(input("Digite um número maior que 1: "))
+    if n > 1:
+        primos = numeros_primos(n)
+        print("Números primos até", n, "são:", primos)
+    else:
+        print("Por favor, digite um número maior que 1.")
+except ValueError:
+    print("Entrada inválida. Digite um número inteiro maior que 1.")
